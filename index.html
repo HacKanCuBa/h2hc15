@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>E-Voting from Argentina to the World</title>
+
+        <meta name="description" content="We will expose and discuss about different voting systems used in Argentina in different kinds of election, their vulnerabilities and how some of those systems ended up in different parts of the world">
+        <meta name="author" content="Iván Barrera Oro">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="vendor/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="vendor/reveal.js/css/theme/night.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="vendor/reveal.js/lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'vendor/reveal.js/css/print/pdf.css' : 'vendor/reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="vendor/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+            .reveal h1 {
+                font-size: 3.5em;
+            }
+            .reveal aside {
+                font-size: 0.5em;
+                font-style: italic;
+                text-align: right;
+            }
+            .reveal table {
+                font-size: 80%;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <div class="slides" data-transition="zoom-in fade-out">
+
+                <section>
+                    <section>
+                        <h1>E-Voting from Argentina to the World</h1>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/h2hc-logo.png" />
+                        <p>Obrigado pelo convite!</p>
+                    </section>
+                    <section>
+                        <h2>About Us</h2>
+                        <p><a href="https://twitter.com/ortegaalfredo">Alfredo Ortega</a>: aka <em>CyberGaucho</em>, he's always disrupting systems, from BSD, KVM and Android to electoral voting machines and the Chamber of Deputies. He has a large list of CVE's to his credit, and enjoys being called a whitehat.</p>
+                        <p><a href="https://twitter.com/HacKanCuBa">Iván Barrera Oro</a>: aka <em>HacKan</em>, he's passionate about electronics and informatics. He enjoys gaming, coding, designing and building stuff, travelling, skiing, wine and pwn.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Paradigms</h1>
+                    </section>
+                    <section>
+                        <blockquote>Any voting system must determinate who won the election, and convice the losers that they lost.</blockquote>
+                        <aside>Enrique Chaparro</aside>
+                    </section>
+                    <section>
+                        <blockquote>No technology can fix a political issue.</blockquote>
+                        <img src="assets/imgs/photo-1531083476725-62df3b84b21c.jpg" />
+                    </section>
+                    <section>
+                        <blockquote>If the <strong>vote must be kept secret*</strong>, no current technology other than pen and paper can solve the issue.</blockquote>
+                        <aside>* Article 21.3, Universal Declaration of Human Rights</aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Argentine Electoral System</h1>
+                    </section>
+                    <section>
+                        <h2>Briefly Explained</h2>
+                        <p>Two-round system.</p>
+                        <p>Uses pre-printed pre-marked party ballots (French ballot system).<br />
+                        Alternatively, unique paper ballots are used in certain cases: inmates, Argentines abroad.</p>
+                        <p>Vote must be universal, equal, mandatory and secret.</p>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/boletas-partidarias.jpg" />
+                        <aside>Ballots used in 2017 CABA elections</aside>
+                    </section>
+                    <section>
+                        <h3>Overall procedure</h3>
+                        <img src="assets/imgs/diagrama_proceso_electoral.png" />
+                    </section>
+                    <section>
+                        <h4>Scrutiny</h4>
+                        <ol>
+                            <li><strong>Polling station:</strong>
+                            <ul>
+                                <li>Done by the station's president watched over by parties' prosecutors</li>
+                                <li>Counts votes, makes <em>telegram</em> and acts</li>
+                            </ul></li>
+                            <li><strong>Provisory:</strong>
+                            <ul>
+                                <li>Done by executive branch</li>
+                                <li>Counts <em>telegrams</em></li>
+                            </ul></li>
+                            <li><strong>Final:</strong>
+                            <ul>
+                                <li>Done by judicial branch</li>
+                                <li>Counts acts</li>
+                            </ul></li>
+                        </ol>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Our involvement</h1>
+                    </section>
+                    <section>
+                        <p>We advised deputies and senators at the Congress and helped <strike>stop</strike> delay the implementation of e-voting nation-wide.</p>
+                        <img src="assets/imgs/senado.jpg" />
+                    </section>
+                    <section>
+                        <p>However, despite what you are about to see, a law is going to be passed next week in CABA to use e-voting (probably "Boleta Única Electrónica").</p>
+                        <p>The same was going to happen nation-wide, and it was even going to be sooner, but... things happened (our coin value dropped, economy went sour).</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Boleta Única Electrónica</h1>
+                        <h2>(Vot.Ar®)</h2>
+                        <p>"Unique electronic ballot"</p>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>We researched between 2015 and 2017. Full report and more at <a href="https://github.com/HacKanCuBa/informe-votar">github.com/HacKanCuBa/informe-votar</a>.</li>
+                            <li>All publicly reported issues were fixed by the vendor without any kind of reward (besides legal prosecution!) nor acknowledgment.</li>
+                            <li>Official audits confirmed some vulnerabilities.</li>
+                            <li>We got recognized by Dr. J. Alex Halderman (kudos!)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><strong>E-Voting system</strong> with paper backup, based on Ubuntu Linux, written in Python + web front end (implemented crypto only recently).</li>
+                            <li>The vote is <strong>printed</strong> and <strong>stored</strong> in a RFID chip (ISO15693).</li>
+                            <li>The machine used to <strong>vote</strong> is then used to <strong>count</strong> those votes.</li>
+                            <li>It prints <strong>acts and telegram</strong>; transmits the telegram for the <strong>provisory scrutiny</strong> through Internet; assists (and is required) for the <strong>final scrutiny</strong>.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/bue.jpg" />
+                        <aside>Example ballot</aside>
+                        <aside>RFID chip: NXP ICODE SLI SL2ICS20 or SLIX SL2S2002 (ISO 15693)</aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/bue-back.jpg" />
+                        <aside>Example ballot, printed</aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/credencial_presidente.jpg" />
+                        <aside>Polling station president's ID card</aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/maquina.jpg" />
+                        <aside>The voting/counting machine</aside>
+                    </section>
+                    <section>
+                        <h3>Some details on the machine</h3>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/overview.png" />
+                    </section>
+                    <section>
+                        <img src="assets/imgs/inside.jpg" />
+                        <aside>Inside the machine</aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/inside-behind.jpg" />
+                        <aside>Behind the screen</aside>
+                        <aside>RAM: 2GB DDR3 1600</aside>
+                        <aside>uP: Intel(R) Celeron(R) CPU N2930 @ 1.83GHz</aside>
+                        <aside>uC: Atmel(R) AT91SAM7X256</aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/jtag-elections.jpg" />
+                        <aside>One of several JTAG cables found during CABA elections, 2015</aside>
+                    </section>
+                    <section>
+                        <h3>Data structure inside the Tag</h3>
+                        <aside>More info about the chip and how data is stored: see IV. B of the report.</aside>
+                    </section>
+                    <section>
+                            <code>K1 T2 T1 L1 C4 C3 C2 C1 D1...Dn W1 W2 W3 W4</code>
+                            <table>
+                            <thead>
+                                    <tr>
+                                            <th>Type</th>
+                                            <th>Desc</th>
+                                            <th>Size (bytes)</th>
+                                            <th>Endianness</th>
+                                            <th>Stored as</th>
+                                            <th>Fixed value</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                            <td>K</td>
+                                            <td>Token</td>
+                                            <td>1</td>
+                                            <td>-</td>
+                                            <td>HEX</td>
+                                            <td>0x1C</td>
+                                    </tr>
+                                    <tr>
+                                            <td>T</td>
+                                            <td>Tag category</td>
+                                            <td>2</td>
+                                            <td>little-endian</td>
+                                            <td>HEX</td>
+                                            <td>-</td>
+                                    </tr>
+                                    <tr>
+                                            <td>L</td>
+                                            <td>Data lenght</td>
+                                            <td>1</td>
+                                            <td>-</td>
+                                            <td>HEX</td>
+                                            <td>-</td>
+                                    </tr>
+                                    <tr>
+                                            <td>C</td>
+                                            <td>CRC32(Data)</td>
+                                            <td>4</td>
+                                            <td>little-endian</td>
+                                            <td>HEX</td>
+                                            <td>-</td>
+                                    </tr>
+                                    <tr>
+                                            <td>D</td>
+                                            <td>Data</td>
+                                            <td>n</td>
+                                            <td>-</td>
+                                            <td>ASCII</td>
+                                            <td>-</td>
+                                    </tr>
+                                    <tr>
+                                            <td>W</td>
+                                            <td>Write test?</td>
+                                            <td>4</td>
+                                            <td>-</td>
+                                            <td>ASCII</td>
+                                            <td>W_OK</td>
+                                    </tr>
+                            </tbody>
+                            </table>
+                    </section>
+                    <section>
+                        <p>Tag Categories</p>
+                        <pre><code class="hlpy">COD_TAG_VACIO = '\x00\x00'
+COD_TAG_VOTO = '\x00\x01' 
+COD_TAG_USUARIO_MSA = '\x00\x02'
+COD_TAG_PRESIDENTE_MESA = '\x00\x03'
+COD_TAG_RECUENTO = '\x00\x04'
+COD_TAG_APERTURA = '\x00\x05'
+COD_TAG_DEMO = '\x00\x06'
+COD_TAG_VIRGEN = '\x00\x07'
+COD_TAG_INICIO = '\x00\x7F'
+COD_TAG_ADDENDUM = '\x00\x80'
+COD_TAG_NO_ENTRA = '\x00\x45'
+COD_TAG_DESCONOCIDO = '\xff\xff'
+</code></pre>
+                    </section>
+                    <section>
+                        <h3>What we found?</h3>
+                        <p>The same old fears...</p>
+                    </section>
+                    <section>
+                        <ol>
+                            <li>Command Injection (medium threat): in QR code generator routine, exploited through polling station opening phase.</li>
+                            <li>Weak Authentication (high threat): trivial user authentication through fixed tag category allows easily crafted authentication tags.</li>
+                            <li>Multivote (critical threat): wrong implementation of vote counting routine allows several votes to be counted from the tag (fits about 10~12).</li>
+                            <li>Several danger indicators: poor code quality, tons of lines, several <code>eval</code>s, no internal audit process, non-specialized hardware.</li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h4>Command Injection</h4>
+                        <pre><code class="hlpy">def crear_qr(datos):
+    qr = None
+    fd, temp_path = mkstemp(suffix='.png', prefix='qr_tmp_')
+    tmpl_comando = u'qrencode -o %s -s%s -m0 -l%s "%s"'
+    comando = tmpl_comando % (temp_path, unicode(QR_PIXEL_SIZE),
+                              QR_ERROR_LEVEL, u''.join(datos))
+    os.system(comando)
+</code></pre>
+                    <p>Exploit: input last name (or first name) and append command:<br />
+                    <code>Bolsonaro;echo '#EleNão'</code>
+                    </p>
+                    </section>
+                    <section>
+                        <h4>Weak Authentication</h4>
+                        <img src="assets/imgs/maintenance-screen.jpg" />
+                        <p>Exploit: craft a ballot with the <em>Technician</em> category: <code>0x1C0200</code>.
+                    </section>
+                    <section>
+                        <h4>Multivote</h4>
+                        <pre><code class="hlpy">for elem in datos_tag.voto_categoria:
+    cod_categoria = elem["cod_categoria"].strip()
+    cod_candidato = elem["cod_candidatura"].strip()
+    if cod_candidato == COD_LISTA_BLANCO:
+        candidato = Candidato.one(codigo__endswith=cod_candidato,
+                                  cod_categoria=cod_categoria)
+    else:
+        candidato = Candidato.one(codigo__endswith="." + cod_candidato,
+                                  cod_categoria=cod_categoria)
+    candidatos.append(candidato)
+</code></pre>
+                        <p>Exploit: craft a ballot with many votes: <code>0x1C0100...</code></p>
+                        <ul>
+                            <li>Normal vote: <code>06CABA.1COM567DIP432JEF123</code></li>
+                            <li>Multivote: <code>06CABA.1COM567DIP432JEF123JEF123JEF123</code></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Ward Boss</h3>
+                        <video width="854" height="480" controls>
+                            <source src="assets/vids/punterodigital.mp4" type="video/mp4">
+                        </video>
+                        <aside>"voto de cabresto"</aside>
+                    </section>
+                    <section>
+                        <h3>My Cheap Chip Zapper</h3>
+                        <img src="assets/imgs/zapper.jpg" />
+                    </section>
+                    <section>
+                        <h3>NEMO</h3>
+                        <video width="854" height="480" controls>
+                            <source src="assets/vids/rfidsniffing.mp4" type="video/mp4">
+                        </video>
+                        <aside>RFID Sniffing using a regular short-wave radio tunned in 13.56MHz</aside>
+                        <!-- did the nfc-drip attack guy got inspired by us? -->
+                    </section>
+                </section>
+
+                <section>
+                    <p>After those events, we were unable to get our hands on any other Argentine voting system.</p>
+                    <p>But we can still comment a thing or two about them.</p>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>E-Voto</h1>
+                        <h2>Altec</h2>
+                    </section>
+                    <section>
+                        <p>A company funded by the Province of Rio Negro.</p>
+                        <p>Almost used in Tierra del Fuego in 2016.</p>
+                        <p>We weren't able to actually audit this system, but it doesn't look good.</p>
+                    </section>
+                    <section>
+                        <p>The voter identifies to the machine using a RFID card and <strong>its own fingerprint!</strong></p>
+                        <img src="assets/imgs/altec-huella.png" />
+                    </section>
+                    <section>
+                        <p>The voter chooses candidates from a touch screen, and finally a ticket is printed along with the vote stored in the card.</p>
+                        <img src="assets/imgs/altec-vote.jpg" />
+                    </section>
+                    <section>
+                        <p>In turn, both the ticket and card are deposited in a ballot box and later counted using the same machine.</p>
+                        <img src="assets/imgs/altec-urna.jpg" />
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Vo.Co.Mi</h1>
+                        <h2>Misiones Electoral Court</h2>
+                    </section>
+                    <section>
+                        <p>Javier was able to see it at an event named Smart Cities, in Buenos Aires, 2017, held at the same time as the Ekoparty (yet electoral officials said that voting machines weren't available to be inspected at Ekoparty).</p>
+                    </section>
+                    <section>
+                        <video width="854" height="480" controls>
+                            <source src="assets/vids/vocomi-smartcities.mp4" type="video/mp4">
+                        </video>
+                    </section>
+                    <section>
+                        <p>The voter chooses candidates from a touch screen, and finally a ticket is printed, which in turn is deposited in a ballot box and later counted using the same machine.</p>
+                        <img src="assets/imgs/vocomi-ticket.jpg" />
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Vot-E</h1>
+                        <h2>UNCUYO</h2>
+                    </section>
+                    <section>
+                        <p>Designed by the National University of Cuyo.</p>
+                        <p>The machine is a standard PC that runs a voting software over Windows.</p>
+                        <p>The voting app <strong>crashed</strong> during a 30" system overview, and <code>explorer.exe</code> was needed to be killed, so there's not much to say about it...</p>
+                    </section>
+                    <section>
+                        <p>The voter selects candidates from a touch screen and a standard printer connected to the computer prints a ballot, which is then deposited in the ballot box and counted with the same software.<p>
+                        <img src="assets/imgs/uncuyo-ballot.jpg" />
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>EMS</h1>
+                        <h2>Smartmatic</h2>
+                    </section>
+                    <section>
+                        <p>Arrives in Argentina in 2015 to compete for the CABA licitation, but loses to MSA.</p>
+                    </section>
+                    <section>
+                        <p>Tested in primary elections in La Falda and Marcos Juarez, Cordoba, in July, 2015.</p>
+                        <img src="assets/imgs/smartmatic-cba.jpg" />
+                    </section>
+                    <section>
+                        <p>Provides, mostly, other electoral services such as telegram transmition and voter biometric identification.</p>
+                        <p>These biometric devices store <strong>all</strong> of the data in a memory card, supposedly encrypted (never audited). At least one device "got lost".</p>
+                        <p>In Venezuela, Smartmatic is investigated and charged with election tampering in 2017.</p>
+                        <aside>More info at <a href="https://blog.smaldone.com.ar/2017/08/08/smartmatic-de-venezuela-a-la-argentina/">Javier's blog</a></aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Miru Systems</h1>
+                    </section>
+                    <section>
+                        <p>South Korean electoral services provider, such as voting machines.</p>
+                        <p>Note that South Korea votes with unique paper ballots :)</p>
+                    </section>
+                    <section>
+                        <p>Our Government <strong>denies all of the following</strong>.<p>
+                        <p>It was proved that in 2016 delegates from South Korean government visited Argentina: they wrote a memorandum.</p>
+                        <p>Several machines were left in Customs, yet e-voting was not approved by Congress nor machines were designed!</p>
+                        <p>When Miru arrived at the Democratic Republic of Congo, we were able to prove that there was a connection with Argentina :)</p>
+                    </section>
+                    <section>
+                        <p><em>The Sentry</em> contacted us and gave us a Congolese document presented by Miru Systems (we can't disclose the original document).</p>
+                        <p>This document had covered-up information prepared to be used in Argentina.</p>
+                        <p>We wrote a technical document based on it and publicly available info for them.<br/ >
+                        <aside>Publication: <a href="https://cdn.thesentry.org/wp-content/uploads/2018/06/DRCelections_SentryAlert_June2018_0619.pdf">Electronic Voting Technology DRC: Security Vulnerabilities and Déjà Vu</a></aside>
+                        <aside>J. L. Hall about the research with us: <a href="https://cdt.org/blog/new-voting-system-vulnerabilities-in-congo/">New Voting System Vulnerabilities in Congo </a></aside>
+                        <aside>More info: <a href="http://borderperiodismo.com/2018/06/28/las-pruebas-de-que-las-maquinas-de-votoelectronico-del-congo-fueron-disenadas-para-usarse-en-argentina/">Las pruebas de que las máquinas de #VotoElectrónico del Congo se diseñaron para Argentina</a></aside>
+                    </section>
+                    <section>
+                        <img src="assets/imgs/miru-doc-seleccionar.jpg">
+                    </section>
+                    <section>
+                        <img src="assets/imgs/miru-doc-dni.jpg">
+                    </section>
+                    <section>
+                        <img src="assets/imgs/miru-doc-candidatos.jpg">
+                    </section>
+                    <section>
+                        <img src="assets/imgs/miru-doc-candidatos2.jpg">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Conclusions</h1>
+                    </section>
+                    <section>
+                        <p>E-voting is a danger to democracy and it will be for a long, long time.</p>
+                        <p>We can use modern technology in the electoral process, just avoid the vote casting phase.</p>
+                        <p>We as hackers must get involved!</p>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>Perguntas?</h1>
+                    <h2>Alguma dúvida?</h2>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Hack the planet!</h1>
+                        <aside>License <strong>CC BY-SA 4.0</strong></aside>
+                    </section>
+                    <section>
+                        <p>Most of the info is based on our own investigation. Check the following sites:</p>
+                        <ul>
+                            <li><a href="https://noalvotoelectronico.com">noalvotoelectronico.com</a></li>
+                            <li><a href="https://blog.smaldone.com.ar">blog.smaldone.com.ar</a></li>
+                            <li><a href="https://ivan.barreraoro.com.ar">ivan.barreraoro.com.ar</a></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Sources</h1>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=uO1iSPyMYuo">Alfredo Ortega sobre el voto electrónico en el Senado (15-11-2016)</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=9k4EQEE5uDw">Javier Smaldone sobre el voto electrónico en el Senado (15-11-2016)</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=pahgpyO0IX8">3/11/2016 - Plenario de Comisiones: Iván Barrera Oro</a></li>
+                            <li><a href="https://ivan.barreraoro.com.ar/2015/08/ver-vot-ar-una-mala-eleccion/">Vot.Ar: una mala eleccion</a></li>
+                            <li><a href="https://noalvotoelectronico.com">No al Voto Electronico</a></li>
+                            <li><a href="https://blog.smaldone.com.ar/2016/09/10/voto-electronico-y-huellas-digitales/">Voto electrónico y huellas digitales</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=uO1iSPyMYuo">Alfredo Ortega sobre el voto electrónico en el Senado (15-11-2016)</a></li>
+                            <li><a href="https://blog.smaldone.com.ar/2017/10/03/si-las-impresoras-no-van-a-la-ekoparty/">Si las “impresoras” no van a la ekoparty…</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=3U6BcKW_WcY">El sistema de voto electrónico VoCoMi (Voto Codificado Misiones) en Smartcities Buenos Aires</a></li>
+                            <li><a href="http://www.uncuyo.edu.ar/transparencia/upload/como-funciona-vot-e-uncuyo.pdf">Vot-E UNCUYO</a></li>
+                            <li><a href="https://www.cadena3.com/noticias/cordoba/voto-electronico-debuto-falda-marcos-juarez_63748">El voto electrónico debutó en La Falda y Marcos Juárez</a></li>
+                            <li><a href="https://blog.smaldone.com.ar/2017/08/08/smartmatic-de-venezuela-a-la-argentina/">Smartmatic, de Venezuela a la Argentina</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><a href="https://cdn.thesentry.org/wp-content/uploads/2018/06/DRCelections_SentryAlert_June2018_0619.pdf">Electronic Voting Technology DRC: Security Vulnerabilities and Déjà Vu</a></li>
+                            <li><a href="https://cdt.org/blog/new-voting-system-vulnerabilities-in-congo/">New Voting System Vulnerabilities in Congo </a></li>
+                            <li><a href="http://borderperiodismo.com/2018/06/28/las-pruebas-de-que-las-maquinas-de-votoelectronico-del-congo-fueron-disenadas-para-usarse-en-argentina/">Las pruebas de que las máquinas de #VotoElectrónico del Congo se diseñaron para Argentina</a></li>
+                            <li><a href="http://www.koreaherald.com/view.php?ud=20181016000868">Korean electoral branch's ODA projects linked to criminal activities: lawmaker</a></li>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="vendor/reveal.js/lib/js/head.min.js"></script>
+        <script src="vendor/reveal.js/js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'vendor/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    //{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    //{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'vendor/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    //{ src: 'plugin/search/search.js', async: true },
+                    //{ src: 'plugin/zoom-js/zoom.js', async: true },
+                    //{ src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
